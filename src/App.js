@@ -1,5 +1,5 @@
 import { palavras } from './palavras.js';
-import React from 'react';
+import React, { useState } from 'react';
 import Jogo from './components/Jogo.js';
 import Letras from './components/Letras.js';
 import Chute from './components/Chute.js';
@@ -14,22 +14,31 @@ function App() {
   const [jogados, setJogados] = React.useState([]);
   const [iniciado, setIniciado] = React.useState(false);
 
-  function esconderPalavra(palavra) {
-    let palavraEscondida = palavra.split('').map(letra => "_");
-    return palavraEscondida.join('');
-  }
-
   function tirarAcentos(palavra) {
     return palavra.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
   }
 
-  function revelarLetras(letra,arrayPalavra,arrayPalavraEscondida){
-    while(arrayPalavra.indexOf(letra) !== -1){
+  function revelarLetras(letra, arrayPalavra, arrayPalavraEscondida) {
+    while (arrayPalavra.indexOf(letra) !== -1) {
       let index = arrayPalavra.indexOf(letra);
-      arrayPalavraEscondida[index] = letra;
+      arrayPalavraEscondida[index] = palavra[index];
       arrayPalavra[index] = "_";
     }
     return arrayPalavraEscondida;
+  }
+
+  function jogadaErrada(erros) {
+    setErros(erros + 1, () => {
+      setImagem(pathForca + erros + ".png");
+    });
+  }
+
+  function checkVitoria() {
+    if (palavraEscondida === palavra) {
+      setClassPalavra('certo');
+      setPalavraEscondida(palavra);
+      setIniciado(false);
+    }
   }
 
 
@@ -38,40 +47,40 @@ function App() {
     let palavraArray = tirarAcentos(palavra).split('');
     let palavraEscondidaArray = palavraEscondida.split('');
     if (palavraArray.indexOf(letra) !== -1) {
-      let palavraEscondidaNova = revelarLetras(letra,palavraArray,palavraEscondidaArray);
-      setPalavraEscondida(palavraEscondidaNova.join(''));
+      let palavraEscondidaNova = revelarLetras(letra, palavraArray, palavraEscondidaArray);
+      setPalavraEscondida(palavraEscondidaNova.join(''), checkVitoria);
     } else {
-      setErros(erros + 1);
-      setImagem(pathForca + erros + '.png');
+      jogadaErrada(erros);
       if (erros === 6) {
         setClassPalavra('errado');
         setPalavraEscondida(palavra);
         setIniciado(false);
       }
     }
-    if (palavraEscondida === palavra) {
-      setClassPalavra('certo');
-      setPalavraEscondida(palavra);
-      setIniciado(false);
-    }
   }
 
   function iniciarJogo() {
-    const escondida = esconderPalavra(palavra);
-    console.log(escondida);
     setImagem(pathForca + '0.png');
     setErros(0);
-    setPalavraEscondida(escondida);
     setJogados([]);
     setIniciado(true);
   }
 
+  function esconderPalavra(palavra) {
+    let palavraEscondida = palavra.split('').map(letra => "_");
+    setPalavraEscondida(palavraEscondida.join(''));
+  }
+
+
   function escolherPalavra() {
     const novaPalavra = palavras[Math.floor(Math.random() * palavras.length)];
     setPalavra(novaPalavra);
+    esconderPalavra(novaPalavra);
+    console.log(palavra);
     setClassPalavra('em-progresso');
     iniciarJogo();
   }
+
 
   const jogo = {
     palavra: palavraEscondida,
