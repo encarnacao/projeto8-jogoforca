@@ -2,6 +2,7 @@ import { palavras } from './palavras.js';
 import React from 'react';
 import Jogo from './components/Jogo.js';
 import Letras from './components/Letras.js';
+import Chute from './components/Chute.js';
 
 function App() {
   const [erros, setErros] = React.useState(0);
@@ -14,31 +15,31 @@ function App() {
   const [iniciado, setIniciado] = React.useState(false);
 
   function esconderPalavra(palavra) {
-    let palavraEscondida = palavra.split('').map((letra, i) => i === palavra.length - 1 ? "_" : "_ ");
+    let palavraEscondida = palavra.split('').map(letra => "_");
     return palavraEscondida.join('');
-  }
-
-  function formatarEscondida(palavraEscondida) {
-    return palavraEscondida.split('').map(letra => letra === "_" ? letra = "_ " : letra);
   }
 
   function tirarAcentos(palavra) {
     return palavra.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
   }
 
+  function revelarLetras(letra,arrayPalavra,arrayPalavraEscondida){
+    while(arrayPalavra.indexOf(letra) !== -1){
+      let index = arrayPalavra.indexOf(letra);
+      arrayPalavraEscondida[index] = letra;
+      arrayPalavra[index] = "_";
+    }
+    return arrayPalavraEscondida;
+  }
+
+
   function jogada(letra) {
     setJogados([...jogados, letra]);
     let palavraArray = tirarAcentos(palavra).split('');
-    if (palavraArray.includes(letra)) {
-      while (palavraArray.includes(letra)) {
-        let index = palavraArray.indexOf(letra);
-        let palavraEscondidaArray = palavraEscondida.split(' ');
-
-        console.log(palavraEscondidaArray)
-        palavraEscondidaArray[index] = letra;
-        setPalavraEscondida(formatarEscondida(palavraEscondidaArray.join('')).join(''));
-        palavraArray[index] = '*';
-      }
+    let palavraEscondidaArray = palavraEscondida.split('');
+    if (palavraArray.indexOf(letra) !== -1) {
+      let palavraEscondidaNova = revelarLetras(letra,palavraArray,palavraEscondidaArray);
+      setPalavraEscondida(palavraEscondidaNova.join(''));
     } else {
       setErros(erros + 1);
       setImagem(pathForca + erros + '.png');
@@ -50,12 +51,14 @@ function App() {
     }
     if (palavraEscondida === palavra) {
       setClassPalavra('certo');
+      setPalavraEscondida(palavra);
       setIniciado(false);
     }
   }
 
   function iniciarJogo() {
     const escondida = esconderPalavra(palavra);
+    console.log(escondida);
     setImagem(pathForca + '0.png');
     setErros(0);
     setPalavraEscondida(escondida);
@@ -77,13 +80,11 @@ function App() {
     escolher: escolherPalavra
   }
 
-
-
-
   return (
     <div className="App">
       <Jogo jogo={jogo} />
       <Letras jogados={jogados} jogoIniciado={iniciado} jogada={jogada} />
+      <Chute />
     </div>
   );
 }
