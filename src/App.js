@@ -13,6 +13,10 @@ function App() {
   const [iniciado, setIniciado] = React.useState(false);
   const [input,setInput] = React.useState('');
 
+  function tirarAcentos(palavra) {
+    return palavra.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
+  }
+
   const jogo = {
     palavra: palavraEscondida,
     classe: classPalavra,
@@ -31,6 +35,7 @@ function App() {
     letrasClicadas: letrasClicadas,
     jogoIniciado: iniciado,
     erros: erros,
+    tirarAcentos: tirarAcentos,
     setLetrasClicadas: setLetrasClicadas,
     setIniciado: setIniciado,
     setClassPalavra: setClassPalavra,
@@ -42,11 +47,15 @@ function App() {
   const chute = {
     palavra: palavra,
     input: input,
+    palavraEscondida: palavraEscondida,
+    tirarAcentos: tirarAcentos,
+    setPalavraEscondida: setPalavraEscondida,
     setInput: setInput,
     setErros: setErros,
     setClassPalavra: setClassPalavra,
-    setIncidiado: setIniciado,
+    setIniciado: setIniciado,
   }
+
 
   return (
     <div className="App">

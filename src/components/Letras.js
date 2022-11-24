@@ -28,9 +28,6 @@ export default function Letras(props) {
         { letra: 'Z', disabled: props.letras.letrasClicadas.includes('z'), jogada: () => jogada('z') },
     ];
 
-    function tirarAcentos(palavra) {
-        return palavra.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
-    }
 
     function revelarLetras(letra, arrayPalavra, arrayPalavraEscondida) {
         while (arrayPalavra.indexOf(letra) !== -1) {
@@ -53,7 +50,7 @@ export default function Letras(props) {
 
     function jogada(letra) {
         props.letras.setLetrasClicadas([...props.letras.letrasClicadas, letra]);
-        const palavraArray = tirarAcentos(props.letras.palavra).split('');
+        const palavraArray = props.letras.tirarAcentos(props.letras.palavra).split('');
         const contemLetra = palavraArray.indexOf(letra) !== -1
         const palavraEscondidaArray = props.letras.palavraEscondida.split('');
         const palavraEscondidaNova = contemLetra ? revelarLetras(letra, palavraArray, palavraEscondidaArray).join('') : props.letras.palavraEscondida;

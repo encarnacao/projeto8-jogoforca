@@ -14,6 +14,7 @@ export default function Jogo(props) {
 
     function escolherPalavra() {
         const novaPalavra = palavras[Math.floor(Math.random() * palavras.length)];
+        console.log(novaPalavra);
         props.jogo.setPalavra(novaPalavra);
         esconderPalavra(novaPalavra);
         props.jogo.setClassPalavra('em-progresso');
