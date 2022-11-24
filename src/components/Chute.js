@@ -5,7 +5,8 @@ export default function Chute(props) {
 
     function checkVitoria() {
         const palavra = props.chute.tirarAcentos(props.chute.palavra);
-        if (palavra === props.chute.input) {
+        const chute = props.chute.tirarAcentos(props.chute.input);
+        if (palavra === chute) {
             props.chute.setClassPalavra('certo');
         } else {
             props.chute.setErros(6);
