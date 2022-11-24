@@ -89,12 +89,14 @@ body {
     border: 1px solid #7aa7c7;
     border-radius: 3px;
     transition: filter 0.2s ease;
+    cursor: pointer;
 }
 
 .letras button:disabled {
     color: #798a9f;
     background: #9faab5;
     border: 1px solid #7aa7c7;
+    cursor: default;
 }
 
 .chute {
