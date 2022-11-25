@@ -5,7 +5,6 @@ import Chute from './components/Chute.js';
 
 function App() {
   const [erros, setErros] = React.useState(0);
-  const pathForca = "./assets/images/forca";
   const [palavra, setPalavra] = React.useState('');
   const [classPalavra, setClassPalavra] = React.useState('em-progresso');
   const [palavraEscondida, setPalavraEscondida] = React.useState('');
@@ -18,7 +17,7 @@ function App() {
   }
 
   const jogo = {
-    imagem: pathForca + erros + ".png",
+    imagem: `./assets/images/forca${erros}.png`,
     palavraEscondida,
     palavra,
     classPalavra,

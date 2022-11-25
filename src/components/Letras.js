@@ -11,7 +11,7 @@ export default function Letras(props) {
 
     function revelarLetras(letra, arrayPalavra, arrayPalavraEscondida) {
         while (arrayPalavra.indexOf(letra) !== -1) {
-            let index = arrayPalavra.indexOf(letra);
+            const index = arrayPalavra.indexOf(letra);
             arrayPalavraEscondida[index] = props.letras.palavra[index];
             arrayPalavra[index] = "_";
         }
