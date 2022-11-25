@@ -26,7 +26,7 @@ export default function Jogo(props) {
     return (
         <div className="jogo">
             <div className="forca">
-                <img src={props.jogo.imagem} alt="Forca" />
+                <img data-test="game-image" src={props.jogo.imagem} alt="Forca" />
             </div>
             <div className="palavra">
                 <button className="escolher-palavra" data-test="choose-word" onClick={escolherPalavra}>Escolher Palavra</button>
