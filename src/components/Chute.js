@@ -19,7 +19,7 @@ export default function Chute(props) {
             props.chute.setClassPalavra('certo');
         } else {
             //Apenas dando semantica ao código
-            const maxErros = 6; 
+            const maxErros = 6;
             props.chute.setErros(maxErros);
             props.chute.setClassPalavra('errado');
         }
