@@ -29,7 +29,7 @@ export default function Chute(props) {
         <div className="chute">
             <p>Já sei a palavra!</p>
             <input type="text" data-test="guess-input" onKeyDown={handleKeyDown} value={props.chute.input} onChange={handleChange} disabled={(props.chute.palavraEscondida === props.chute.palavra)} id="chute"></input>
-            <button onClick={checkVitoria} data-test="gess-button" disabled={(props.chute.palavraEscondida === props.chute.palavra)}>Chutar</button>
+            <button onClick={checkVitoria} disabled={(props.chute.palavraEscondida === props.chute.palavra)} data-test="guess-button">Chutar</button>
         </div>
     )
 }

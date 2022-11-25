@@ -1,4 +1,4 @@
-import { palavras } from '../palavras.js';
+import palavras from '../palavras.js';
 export default function Jogo(props) {
     function iniciarJogo() {
         props.jogo.setErros(0);
