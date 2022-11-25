@@ -1,5 +1,6 @@
 export default function Chute(props) {
 
+    const desabilitado = props.chute.palavraEscondida === props.chute.palavra;
     function handleChange(event) {
         props.chute.setInput(event.target.value);
     }
@@ -17,7 +18,9 @@ export default function Chute(props) {
         if (palavra === chute) {
             props.chute.setClassPalavra('certo');
         } else {
-            props.chute.setErros(6);
+            //Apenas dando semantica ao código
+            const maxErros = 6; 
+            props.chute.setErros(maxErros);
             props.chute.setClassPalavra('errado');
         }
         props.chute.setPalavraEscondida(props.chute.palavra);
@@ -28,8 +31,23 @@ export default function Chute(props) {
     return (
         <div className="chute">
             <p>Já sei a palavra!</p>
-            <input type="text" data-test="guess-input" onKeyDown={handleKeyDown} value={props.chute.input} onChange={handleChange} disabled={(props.chute.palavraEscondida === props.chute.palavra)} id="chute"></input>
-            <button onClick={checkVitoria} disabled={(props.chute.palavraEscondida === props.chute.palavra)} data-test="guess-button">Chutar</button>
+            <input
+                type="text"
+                data-test="guess-input"
+                onKeyDown={handleKeyDown}
+                value={props.chute.input}
+                onChange={handleChange}
+                disabled={desabilitado}
+                id="chute"
+            >
+            </input>
+            <button
+                onClick={checkVitoria}
+                disabled={desabilitado}
+                data-test="guess-button"
+            >
+                Chutar
+            </button>
         </div>
-    )
+    );
 }

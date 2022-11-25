@@ -8,7 +8,7 @@ export default function Jogo(props) {
     }
 
     function esconderPalavra(palavra) {
-        let palavraEscondida = palavra.split('').map(letra => "_");
+        const palavraEscondida = palavra.split('').map(() => "_");
         props.jogo.setPalavraEscondida(palavraEscondida.join(''));
     }
 
@@ -30,7 +30,7 @@ export default function Jogo(props) {
             </div>
             <div className="palavra">
                 <button className="escolher-palavra" data-test="choose-word" onClick={escolherPalavra}>Escolher Palavra</button>
-                <h1 className={props.jogo.classe} data-test="word" data-answer={props.jogo.palavra}>{props.jogo.palavraEscondida}</h1>
+                <h1 className={props.jogo.classPalavra} data-test="word" data-answer={props.jogo.palavra}>{props.jogo.palavraEscondida}</h1>
             </div>
         </div>
     );

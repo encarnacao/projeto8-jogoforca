@@ -10,59 +10,59 @@ function App() {
   const [classPalavra, setClassPalavra] = React.useState('em-progresso');
   const [palavraEscondida, setPalavraEscondida] = React.useState('');
   const [letrasClicadas, setLetrasClicadas] = React.useState([]);
-  const [iniciado, setIniciado] = React.useState(false);
-  const [input,setInput] = React.useState('');
+  const [jogoIniciado, setIniciado] = React.useState(false);
+  const [input, setInput] = React.useState('');
 
   function tirarAcentos(palavra) {
     return palavra.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
   }
 
   const jogo = {
-    palavraEscondida: palavraEscondida,
-    palavra: palavra,
-    classe: classPalavra,
-    imagem: pathForca+erros+".png",
-    setPalavra: setPalavra,
-    setPalavraEscondida: setPalavraEscondida,
-    setErros: setErros,
-    setClassPalavra: setClassPalavra,
-    setIniciado: setIniciado,
-    setLetrasClicadas: setLetrasClicadas,
-    setInput: setInput,
-  }
+    imagem: pathForca + erros + ".png",
+    palavraEscondida,
+    palavra,
+    classPalavra,
+    setPalavra,
+    setPalavraEscondida,
+    setErros,
+    setClassPalavra,
+    setIniciado,
+    setLetrasClicadas,
+    setInput,
+  };
 
   const letras = {
-    palavra: palavra,
-    palavraEscondida: palavraEscondida,
-    letrasClicadas: letrasClicadas,
-    jogoIniciado: iniciado,
-    erros: erros,
-    tirarAcentos: tirarAcentos,
-    setLetrasClicadas: setLetrasClicadas,
-    setIniciado: setIniciado,
-    setClassPalavra: setClassPalavra,
-    setPalavraEscondida: setPalavraEscondida,
-    setErros: setErros,
-  }
+    palavra,
+    palavraEscondida,
+    letrasClicadas,
+    jogoIniciado,
+    erros,
+    tirarAcentos,
+    setLetrasClicadas,
+    setIniciado,
+    setClassPalavra,
+    setPalavraEscondida,
+    setErros,
+  };
 
   const chute = {
-    palavra: palavra,
-    input: input,
-    palavraEscondida: palavraEscondida,
-    tirarAcentos: tirarAcentos,
-    setPalavraEscondida: setPalavraEscondida,
-    setInput: setInput,
-    setErros: setErros,
-    setClassPalavra: setClassPalavra,
-    setIniciado: setIniciado,
-  }
+    palavra,
+    input,
+    palavraEscondida,
+    tirarAcentos,
+    setPalavraEscondida,
+    setInput,
+    setErros,
+    setClassPalavra,
+    setIniciado,
+  };
 
 
   return (
     <div className="App">
       <Jogo jogo={jogo} />
       <Letras letras={letras} />
-      <Chute chute={chute}/>
+      <Chute chute={chute} />
     </div>
   );
 }

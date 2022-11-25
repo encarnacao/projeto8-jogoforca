@@ -31,26 +31,41 @@ export default function Letras(props) {
     function jogada(letra) {
         props.letras.setLetrasClicadas([...props.letras.letrasClicadas, letra]);
         const palavraArray = props.letras.tirarAcentos(props.letras.palavra).split('');
-        const contemLetra = palavraArray.indexOf(letra) !== -1
+        const contemLetra = palavraArray.indexOf(letra) !== -1;
         const palavraEscondidaArray = props.letras.palavraEscondida.split('');
         const palavraEscondidaNova = contemLetra ? revelarLetras(letra, palavraArray, palavraEscondidaArray).join('') : props.letras.palavraEscondida;
         if (contemLetra) {
             props.letras.setPalavraEscondida(palavraEscondidaNova);
         } else {
+            //Apenas dando semantica ao código
+            const maxErros = 6;
             const novoErro = props.letras.erros + 1;
             props.letras.setErros(novoErro);
-            if (novoErro === 6) {
+            if (novoErro === maxErros) {
                 props.letras.setClassPalavra('errado');
                 props.letras.setPalavraEscondida(props.letras.palavra);
                 props.letras.setIniciado(false);
             }
         }
-        checkVitoria(palavraEscondidaNova)
+        checkVitoria(palavraEscondidaNova);
     }
 
     return (
         <div className="letras">
-            {letras.map((letra) => <button data-test="letter" key={letra.letra} onClick={letra.jogada} disabled={!(props.letras.jogoIniciado) ? true : letra.disabled}>{letra.letra}</button>)}
+            {letras.map((letra) => {
+                const desabilitado = !(props.letras.jogoIniciado) ? true : letra.disabled;
+                return (
+                    <button
+                        data-test="letter"
+                        key={letra.letra}
+                        onClick={letra.jogada}
+                        disabled={desabilitado}
+                    >
+                        {letra.letra}
+                    </button>
+                );
+            }
+            )}
         </div>
     );
 }
