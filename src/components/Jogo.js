@@ -4,6 +4,7 @@ export default function Jogo(props) {
         props.jogo.setErros(0);
         props.jogo.setLetrasClicadas([]);
         props.jogo.setIniciado(true);
+        props.jogo.setInput('');
     }
 
     function esconderPalavra(palavra) {
@@ -28,8 +29,8 @@ export default function Jogo(props) {
                 <img src={props.jogo.imagem} alt="Forca" />
             </div>
             <div className="palavra">
-                <button className="escolher-palavra" onClick={escolherPalavra}>Escolher Palavra</button>
-                <h1 className={props.jogo.classe}>{props.jogo.palavra}</h1>
+                <button className="escolher-palavra" data-test="choose-word" onClick={escolherPalavra}>Escolher Palavra</button>
+                <h1 className={props.jogo.classe} data-test="word" data-answer={props.jogo.palavra}>{props.jogo.palavraEscondida}</h1>
             </div>
         </div>
     );

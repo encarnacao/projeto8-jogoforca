@@ -18,7 +18,8 @@ function App() {
   }
 
   const jogo = {
-    palavra: palavraEscondida,
+    palavraEscondida: palavraEscondida,
+    palavra: palavra,
     classe: classPalavra,
     imagem: pathForca+erros+".png",
     setPalavra: setPalavra,
@@ -27,6 +28,7 @@ function App() {
     setClassPalavra: setClassPalavra,
     setIniciado: setIniciado,
     setLetrasClicadas: setLetrasClicadas,
+    setInput: setInput,
   }
 
   const letras = {
@@ -40,7 +42,6 @@ function App() {
     setIniciado: setIniciado,
     setClassPalavra: setClassPalavra,
     setPalavraEscondida: setPalavraEscondida,
-    setIniciado: setIniciado,
     setErros: setErros,
   }
 

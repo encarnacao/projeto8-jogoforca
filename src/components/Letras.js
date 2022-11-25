@@ -1,14 +1,13 @@
 export default function Letras(props) {
-    
+
     const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
     const letras = alfabeto.map((l) => (
         {
-            letra: l.toUpperCase(), 
-            disabled: props.letras.letrasClicadas.includes(l), 
-            jogada: ()=> jogada(l)
+            letra: l.toUpperCase(),
+            disabled: props.letras.letrasClicadas.includes(l),
+            jogada: () => jogada(l)
         }
-        )); 
-
+    ));
 
     function revelarLetras(letra, arrayPalavra, arrayPalavraEscondida) {
         while (arrayPalavra.indexOf(letra) !== -1) {
@@ -51,7 +50,7 @@ export default function Letras(props) {
 
     return (
         <div className="letras">
-            {letras.map((letra) => <button key={letra.letra} onClick={letra.jogada} disabled={!(props.letras.jogoIniciado) ? true : letra.disabled}>{letra.letra}</button>)}
+            {letras.map((letra) => <button data-test="letter" key={letra.letra} onClick={letra.jogada} disabled={!(props.letras.jogoIniciado) ? true : letra.disabled}>{letra.letra}</button>)}
         </div>
     );
 }
