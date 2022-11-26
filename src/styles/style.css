@@ -141,7 +141,7 @@ body {
 
 @media (max-width: 850px){
     .App{
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
     }
     .chute{
@@ -180,10 +180,14 @@ body {
         max-width: 300px;
     }
 
+    .palavra{
+        height: 200px;
+    }
+
     .letras button{
-        margin: 4px;
-        width: 30px;
-        height: 30px;
+        margin: 5px;
+        width: 45px;
+        height: 45px;
     }
 
     .chute{
@@ -191,18 +195,18 @@ body {
     }
 
     .forca img{
-        min-width: 100px;
+        min-width: 150px;
     }
 
     .palavra button {
-        width: 100px;
+        width: 150px;
         height: 40px;
-        font-size: 10px;
+        font-size: 13px;
         margin-bottom: 10px;
     }
 
     .palavra h1{
-        font-size: 25px;
+        font-size: 32px;
     }
 
 }
