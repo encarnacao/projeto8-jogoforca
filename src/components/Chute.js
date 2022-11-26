@@ -13,8 +13,8 @@ export default function Chute(props) {
     }
 
     function checkVitoria() {
-        const palavra = props.chute.tirarAcentos(props.chute.palavra);
-        const chute = props.chute.tirarAcentos(props.chute.input);
+        const palavra = props.chute.tirarAcentos(props.chute.palavra).toLowerCase();
+        const chute = props.chute.tirarAcentos(props.chute.input).toLowerCase();
         if (palavra === chute) {
             props.chute.setClassPalavra('certo');
         } else {
