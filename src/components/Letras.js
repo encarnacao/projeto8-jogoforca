@@ -1,3 +1,4 @@
+import { DivLetras, ButtonLetra } from "../styles/LetrasStyle";
 export default function Letras(props) {
 
     const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -21,7 +22,6 @@ export default function Letras(props) {
 
     function checkVitoria(escondida) {
         if (escondida === props.letras.palavra) {
-            props.letras.setClassPalavra('certo');
             props.letras.setPalavraEscondida(props.letras.palavra);
             props.letras.setIniciado(false);
         }
@@ -42,7 +42,6 @@ export default function Letras(props) {
             const novoErro = props.letras.erros + 1;
             props.letras.setErros(novoErro);
             if (novoErro === maxErros) {
-                props.letras.setClassPalavra('errado');
                 props.letras.setPalavraEscondida(props.letras.palavra);
                 props.letras.setIniciado(false);
             }
@@ -51,21 +50,21 @@ export default function Letras(props) {
     }
 
     return (
-        <div className="letras">
+        <DivLetras>
             {letras.map((letra) => {
                 const desabilitado = !(props.letras.jogoIniciado) ? true : letra.disabled;
                 return (
-                    <button
+                    <ButtonLetra
                         data-test="letter"
                         key={letra.letra}
                         onClick={letra.jogada}
                         disabled={desabilitado}
                     >
                         {letra.letra}
-                    </button>
+                    </ButtonLetra>
                 );
             }
             )}
-        </div>
+        </DivLetras>
     );
 }

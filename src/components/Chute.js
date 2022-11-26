@@ -1,3 +1,5 @@
+import { DivChute, BotaoChute, InputChute } from "../styles/ChuteStyle";
+
 export default function Chute(props) {
 
     const desabilitado = props.chute.palavraEscondida === props.chute.palavra;
@@ -15,13 +17,10 @@ export default function Chute(props) {
     function checkVitoria() {
         const palavra = props.chute.tirarAcentos(props.chute.palavra).toLowerCase();
         const chute = props.chute.tirarAcentos(props.chute.input).toLowerCase();
-        if (palavra === chute) {
-            props.chute.setClassPalavra('certo');
-        } else {
+        if (palavra !== chute) {
             //Apenas dando semantica ao código
             const maxErros = 6;
             props.chute.setErros(maxErros);
-            props.chute.setClassPalavra('errado');
         }
         props.chute.setPalavraEscondida(props.chute.palavra);
         props.chute.setIniciado(false);
@@ -29,9 +28,9 @@ export default function Chute(props) {
     }
 
     return (
-        <div className="chute">
+        <DivChute>
             <p>Já sei a palavra!</p>
-            <input
+            <InputChute
                 type="text"
                 data-test="guess-input"
                 onKeyDown={handleKeyDown}
@@ -40,14 +39,14 @@ export default function Chute(props) {
                 disabled={desabilitado}
                 id="chute"
             >
-            </input>
-            <button
+            </InputChute>
+            <BotaoChute
                 onClick={checkVitoria}
                 disabled={desabilitado}
                 data-test="guess-button"
             >
                 Chutar
-            </button>
-        </div>
+            </BotaoChute>
+        </DivChute>
     );
 }

@@ -11,11 +11,12 @@ import erro4 from './assets/forca4.png';
 import erro5 from './assets/forca5.png';
 import erro6 from './assets/forca6.png';
 
+import styled from "styled-components";
+import { Reset, GlobalStyle } from './styles/GlobalStyle.js';
 
 function App() {
   const [erros, setErros] = React.useState(0);
   const [palavra, setPalavra] = React.useState('');
-  const [classPalavra, setClassPalavra] = React.useState('em-progresso');
   const [palavraEscondida, setPalavraEscondida] = React.useState('');
   const [letrasClicadas, setLetrasClicadas] = React.useState([]);
   const [jogoIniciado, setIniciado] = React.useState(false);
@@ -31,11 +32,10 @@ function App() {
     imagem: imagensErros[erros],
     palavraEscondida,
     palavra,
-    classPalavra,
+    erros,
     setPalavra,
     setPalavraEscondida,
     setErros,
-    setClassPalavra,
     setIniciado,
     setLetrasClicadas,
     setInput,
@@ -50,7 +50,6 @@ function App() {
     tirarAcentos,
     setLetrasClicadas,
     setIniciado,
-    setClassPalavra,
     setPalavraEscondida,
     setErros,
   };
@@ -63,18 +62,27 @@ function App() {
     setPalavraEscondida,
     setInput,
     setErros,
-    setClassPalavra,
     setIniciado,
   };
 
 
   return (
-    <div className="App">
+    <DivApp>
+      <Reset />
+      <GlobalStyle />
       <Jogo jogo={jogo} />
       <Letras letras={letras} />
       <Chute chute={chute} />
-    </div>
+    </DivApp>
   );
 }
 
 export default App;
+
+
+const DivApp = styled.div`
+  @media (max-width: 850px) {
+    width: 100%;
+    margin: 0 auto;
+  }
+`

@@ -1,5 +1,36 @@
 import palavras from '../palavras.js';
+
+import { DivJogo, ForcaImg, Palavra, BotaoPalavra, EmProgresso, Errado, Certo } from '../styles/JogoStyle.js';
+
 export default function Jogo(props) {
+    const maxErros = 6;
+    const emProgresso = (
+        <EmProgresso 
+        data-test="word" 
+        data-answer={props.jogo.palavra}>
+            {props.jogo.palavraEscondida}
+        </EmProgresso>
+        );
+
+    const certo = (
+        <Certo 
+        data-test="word" 
+        data-answer={props.jogo.palavra}>
+            {props.jogo.palavraEscondida}
+        </Certo>
+        );
+
+    const errado = (
+        <Errado 
+        data-test="word" 
+        data-answer={props.jogo.palavra}>
+            {props.jogo.palavraEscondida}
+        </Errado>
+        );
+  
+    const palavraCerta = props.jogo.erros === maxErros? errado:certo;
+    const jogoTerminado = props.jogo.palavra === props.jogo.palavraEscondida? palavraCerta: emProgresso;
+    
     function iniciarJogo() {
         props.jogo.setErros(0);
         props.jogo.setLetrasClicadas([]);
@@ -18,20 +49,19 @@ export default function Jogo(props) {
         console.log(novaPalavra);
         props.jogo.setPalavra(novaPalavra);
         esconderPalavra(novaPalavra);
-        props.jogo.setClassPalavra('em-progresso');
         iniciarJogo();
     }
 
 
     return (
-        <div className="jogo">
-            <div className="forca">
-                <img data-test="game-image" src={props.jogo.imagem} alt="Forca" />
+        <DivJogo>
+            <div>
+                <ForcaImg data-test="game-image" src={props.jogo.imagem} alt="Forca" />
             </div>
-            <div className="palavra">
-                <button className="escolher-palavra" data-test="choose-word" onClick={escolherPalavra}>Escolher Palavra</button>
-                <h1 className={props.jogo.classPalavra} data-test="word" data-answer={props.jogo.palavra}>{props.jogo.palavraEscondida}</h1>
-            </div>
-        </div>
+            <Palavra>
+                <BotaoPalavra data-test="choose-word" onClick={escolherPalavra}>Escolher Palavra</BotaoPalavra>
+                {jogoTerminado}
+            </Palavra>
+        </DivJogo>
     );
 }
